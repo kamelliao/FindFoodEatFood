@@ -327,7 +327,7 @@ class game3(tk.Frame):  #選擇食物畫面
         self.button2 = tk.Button(self, image= self.image2, relief="flat", bg = '#F8F1A4', border = 0, command = lambda: root.switch_frame(self, game4))  #按鈕外型+跳轉命令
 
         image3 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\吐司人3.png")  #吐司人3圖片檔案位置
-        image3 = image3.resize((370, 370), Image.ANTIALIAS)
+        image3 = image3.resize((400, 370), Image.ANTIALIAS)
         self.image3 = ImageTk.PhotoImage(image3)
         self.lb3 = tk.Label(self, image= self.image3, bg = '#F8F1A4', border = 0)
 
@@ -368,7 +368,8 @@ class game4(tk.Frame):  #選擇食物畫面
         self.lb1 = tk.Label(self, text = 'FindEat   —   找食瞭瞭', bg = '#FFE9C4', font = f1, fg = '#FFB140')
         self.lb2 = tk.Label(self, text = "適合你吃的食物是:", bg = '#F8F1A4', font = f2, fg = '#554640')
 
-        foodlist = ["台式/小吃", "日式料理", "西式/美式", "韓式料理", "火鍋", "東南亞", "素食/健康", "飲料/甜點"]
+        foodlist = ['義大利麵', '咖哩', '牛排', '粥', '冰品', '飲料', '火鍋', '水餃/鍋貼', '小吃', '炒飯'
+                   ,  '日式料理', '韓式料理', '泰式料理', '滷味', '鹹酥雞', '便當', '早午餐', '低GI', '拉麵', '素食', '速食']
         food = str(random.choices(foodlist)[0])
         self.lb3 = tk.Label(self, text = food + '!', bg = '#F8F1A4', font = f2, fg = '#554640')
 
@@ -381,8 +382,10 @@ class game4(tk.Frame):  #選擇食物畫面
 
         self.lb1.place(x = 0, y = 0, anchor = 'nw', width = 500, height = 60)
         self.lb2.place(x = 70, y = 130, anchor = 'nw')
-        
-        if len(food) == 2:
+
+        if len(food) == 1:
+            self.lb3.place(x = 220, y = 450, anchor = 'nw')
+        elif len(food) == 2:
             self.lb3.place(x = 200, y = 450, anchor = 'nw')
         elif len(food) == 3:
             self.lb3.place(x = 180, y = 450, anchor = 'nw')
@@ -392,8 +395,10 @@ class game4(tk.Frame):  #選擇食物畫面
             self.lb3.place(x = 140, y = 450, anchor = 'nw')
 
         self.lb4.place(x = 50, y = 530, anchor = 'nw')
-        
-        if len(food) == 2:
+
+        if len(food) == 1:
+            self.button1.place(x = 160, y = 531, anchor = 'nw')
+        elif len(food) == 2:
             self.button1.place(x = 155, y = 531, anchor = 'nw')
         elif len(food) == 3:
             self.button1.place(x = 150, y = 531, anchor = 'nw')
