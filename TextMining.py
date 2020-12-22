@@ -12,12 +12,12 @@ class Review:
         self._opinion_word_file_path = str(opinion_word_file_path)
         self._stop_word_file_path = str(stop_word_file_path)
         self._ws_data_file_path = str(ws_data_file_path)
-        self._opinion_word_df = self.csv2df()
-        self._review_df = self.csv2df()
-        self._review_dict = self.csv2dict()
+        self._opinion_word_df = self.opinion_csv2df()
+        self._review_df = self.review_csv2df()
+        self._review_dict = self.review_csv2dict()
         self._store_review = self.store_review_score()  # [[ids, store_name, score], ...]
         self._stop_word_list = self.stop_word_list()  # stop word list
-        # review_file_path：店家評論的 csv 檔，colname = [general_type, specific_type, place_id, name, review1, review2, review3, review4, review5, IG_content, IG_link]
+        # review_file_path：店家評論的 csv 檔，colname = [general_type, specific_type, place_id, name, review1, review2, review3, review4, review5, IG_comment, IG_link]
         # opinion_word_file_path：算分用的 csv 檔，colname = [Word, Score]
         # stop_word_file_path：移除 stopword 用的 txt 檔，可以自由增減
         # mask_file_path：用來畫文字雲外框的 png 檔
@@ -44,14 +44,19 @@ class Review:
     def stop_words(self):
         return self._stop_word_list
 
-    # csv2df：讀入csv檔，轉變成 dataframe <<< 現在有 encoding 問題
-    def csv2df(self):
-        df = pd.read_csv(self._review_file_path, encoding = "utf-8")
+    # opinion_csv2df：讀入 opinion word csv檔，轉變成 dataframe
+    def opinion_csv2df(self):
+        df = pd.read_csv(self._opinion_word_file_path, encoding = "utf-8")  # <<< 現在有 encoding 問題
         return df
 
-    # csv2dict：讀入 csv 檔，轉變成 Dictionary <<< 現在有 encoding 問題
-    def csv2dict(self):
-        df = pd.read_csv(self._review_file_path, encoding = "utf-8")
+    # review_csv2df：讀入 all_review csv檔，轉變成 dataframe
+    def review_csv2df(self):
+        df = pd.read_csv(self._review_file_path, encoding = "utf-8")  # <<< 現在有 encoding 問題
+        return df
+
+    # review_csv2dict：讀入 csv 檔，轉變成 Dictionary 
+    def review_csv2dict(self):
+        df = pd.read_csv(self._review_file_path, encoding = "utf-8")  # <<< 現在有 encoding 問題
         ids = df["place_id"].to_list()
         place_name = df["name"].to_list()
         cate = df["general_type"].to_list()
@@ -61,16 +66,18 @@ class Review:
         comment3 = df["review3"].to_list()
         comment4 = df["review4"].to_list()
         comment5 = df["review5"].to_list()
-        ig_content = df["IG_content"].to_list()  # <<< 需要文喻幫忙把兩分csv合併
-        ig_link = df["IG_link"].to_list()  # <<< 需要文喻幫忙把兩分csv合併
+        IG_comment = df["IG_comment"].to_list()
+        ig_link = df["IG_link"].to_list()
+        region = df["region"].to_list()
         review_dict = {}
         for i in range(len(ids)):
             review_dict[ids[i]] = {
                 "name": place_name[i],
-                "review": [str(comment1[i]), str(comment2[i]), str(comment3[i]), str(comment4[i]), str(comment5[i]), str(ig_content[i])],
+                "review": [str(comment1[i]), str(comment2[i]), str(comment3[i]), str(comment4[i]), str(comment5[i]), str(IG_comment[i])],
                 "general_type": cate[i],
                 "specific_type": sub_cate[i],
-                "ig_link": ig_link[i]
+                "ig_link": ig_link[i],
+                "region": region[i]
             }
         return review_dict
 
@@ -120,6 +127,7 @@ class Review:
             score_stdz = score / (len(all_word_list) + 1) * 10  # 除上 token 數，標準化成 score per token of this store
             
             store_review.append([ids, self._review_dict[ids]["name"], score_stdz])
+
             print("Counting score...")
 
         del ws
@@ -171,16 +179,15 @@ class Review:
         del ws
         return
 
-# 118, gingguan, wenzhou review
+# all review
 while True:
-    # 118
-    review_file_path = "./FindFoodEatFood/crawling/118/118_google_reviews.csv"  # <<< 需文喻幫忙，然後連結改成從 Github 抓
+    review_file_path = "https://github.com/chhtwhc/FindFoodEatFood/raw/main/crawling/all_review.csv"
     opinion_word_file_path = "./CSentiPackage/ANTUSD_traditional/opinion_word.csv"  # 固定的
     stop_word_file_path = "./stop_words.txt"  # 固定的
     mask_file_path = "./WordCloud/cloud.png"  # <<< 語晰可能會給新的 .png 檔，現在是固定的
     font_file_path = "./WordCloud/NotoSansCJKtc-hinted/NotoSansCJKtc-Regular.otf"  # <<< 語晰可能會給新的 .otf檔，現在是固定的
     ws_data_file_path = "./data"  # 固定的
-    review_118 = Review(
+    review_all = Review(
                     review_file_path = review_file_path,
                     opinion_word_file_path = opinion_word_file_path,
                     stop_word_file_path = stop_word_file_path,
@@ -188,70 +195,31 @@ while True:
                     font_file_path = font_file_path,
                     ws_data_file_path = ws_data_file_path)
 
-    review_118.wordcloud()
-    print(review_118.store_review_score, end = "\n==========\n")
-
-    # wenzhou
-    review_file_path = "./FindFoodEatFood/crawling/wenzhou/wenzhou_google_reviews.csv"  # <<< 需文喻幫忙，然後連結改成從 Github 抓
-    opinion_word_file_path = "./CSentiPackage/ANTUSD_traditional/opinion_word.csv"  # 固定的
-    stop_word_file_path = "./stop_words.txt"  # 固定的
-    mask_file_path = "./WordCloud/cloud.png"  # <<< 語晰可能會給新的 .png 檔，現在是固定的
-    font_file_path = "./WordCloud/NotoSansCJKtc-hinted/NotoSansCJKtc-Regular.otf"  # <<< 語晰可能會給新的 .otf檔，現在是固定的
-    ws_data_file_path = "./data"  # 固定的
-    review_wenzhou = Review(
-                    review_file_path = review_file_path,
-                    opinion_word_file_path = opinion_word_file_path,
-                    stop_word_file_path = stop_word_file_path,
-                    mask_file_path = mask_file_path,
-                    font_file_path = font_file_path,
-                    ws_data_file_path = ws_data_file_path)
-
-    review_wenzhou.wordcloud()
-    print(review_wenzhou.store_review_score, end = "\n==========\n")
-
-    # gongguan
-    review_file_path = "./FindFoodEatFood/crawling/gongguan/gongguan_google_reviews.csv"  # <<< 需文喻幫忙，然後連結改成從 Github 抓
-    opinion_word_file_path = "./CSentiPackage/ANTUSD_traditional/opinion_word.csv"  # 固定的
-    stop_word_file_path = "./stop_words.txt"  # 固定的
-    mask_file_path = "./WordCloud/cloud.png"  # <<< 語晰可能會給新的 .png 檔，現在是固定的
-    font_file_path = "./WordCloud/NotoSansCJKtc-hinted/NotoSansCJKtc-Regular.otf"  # <<< 語晰可能會給新的 .otf檔，現在是固定的
-    ws_data_file_path = "./data"  # 固定的
-    review_gongguan = Review(
-                    review_file_path = review_file_path,
-                    opinion_word_file_path = opinion_word_file_path,
-                    stop_word_file_path = stop_word_file_path,
-                    mask_file_path = mask_file_path,
-                    font_file_path = font_file_path,
-                    ws_data_file_path = ws_data_file_path)
-
-    review_gongguan.wordcloud()
-    print(review_gongguan.store_review_score, end = "\n==========\n")
+    review_all.wordcloud()
+    print(review_all.store_review_score, end = "\n==========\n")
 
     break
 
-# output a csv
+# output a csv (all in one)
 while True:
     # merge store id
-    all_store_id = review_118.review_dict.keys() + review_wenzhou.review_dict.keys() + review_gongguan.review_dict.keys()
+    all_store_id = review_all.review_dict.keys()
 
+    # merge store region
+    all_store_region = []
+    for ids in review_all.review_dict.keys():
+        all_store_region.append(review_all.review_dict[ids]["region"])    
+    
     # merge store name
     all_store_name = []
-    for i in range(len(review_118.store_review)):
-        all_store_name.append(review_118.store_review[i][1])
-    for i in range(len(review_wenzhou.store_review)):
-        all_store_name.append(review_wenzhou.store_review[i][1])
-    for i in range(len(review_gongguan.store_review)):
-        all_store_name.append(review_gongguan.store_review[i][1])
+    for i in range(len(review_all.store_review)):
+        all_store_name.append(review_all.store_review[i][1])
 
     # merge store score and standardize
     all_store_score = []
     all_store_score_stdz = []
-    for i in range(len(review_118.store_review)):
-        all_store_score.append(review_118.store_review[i][2])
-    for i in range(len(review_wenzhou.store_review)):
-        all_store_score.append(review_wenzhou.store_review[i][2])
-    for i in range(len(review_gongguan.store_review)):
-        all_store_score.append(review_gongguan.store_review[i][2])
+    for i in range(len(review_all.store_review)):
+        all_store_score.append(review_all.store_review[i][2])
 
     score_max = max(all_store_score)
     for score in all_store_score:
@@ -259,33 +227,22 @@ while True:
 
     # merge store general type
     all_store_general_type = []
-    for ids in review_118.review_dict.keys():
-        all_store_general_type.append(review_118.review_dict[ids]["general_type"])
-    for ids in review_wenzhou.review_dict.keys():
-        all_store_general_type.append(review_wenzhou.review_dict[ids]["general_type"])
-    for ids in review_gongguan.review_dict.keys():
-        all_store_general_type.append(review_gongguan.review_dict[ids]["general_type"])
+    for ids in review_all.review_dict.keys():
+        all_store_general_type.append(review_all.review_dict[ids]["general_type"])
 
     # merge store specific type
     all_store_specific_type = []
-    for ids in review_118.review_dict.keys():
-        all_store_specific_type.append(review_118.review_dict[ids]["specific_type"])
-    for ids in review_wenzhou.review_dict.keys():
-        all_store_general_type.append(review_wenzhou.review_dict[ids]["specific_type"])
-    for ids in review_gongguan.review_dict.keys():
-        all_store_general_type.append(review_gongguan.review_dict[ids]["specific_type"])
+    for ids in review_all.review_dict.keys():
+        all_store_specific_type.append(review_all.review_dict[ids]["specific_type"])
 
     # merge store IG_link
     all_store_IG_link = []
-    for ids in review_118.review_dict.keys():
-        all_store_IG_link.append(review_118.review_dict[ids]["ig_link"])
-    for ids in review_wenzhou.review_dict.keys():
-        all_store_general_type.append(review_wenzhou.review_dict[ids]["ig_link"])
-    for ids in review_gongguan.review_dict.keys():
-        all_store_general_type.append(review_gongguan.review_dict[ids]["ig_link"])
+    for ids in review_all.review_dict.keys():
+        all_store_IG_link.append(review_all.review_dict[ids]["ig_link"])
 
     # 匯出成 csv 檔
     all_dict = {
+    "region": all_store_region,
     "Category": all_store_general_type,
     "Subcategory": all_store_specific_type,
     "Id": all_store_id,
