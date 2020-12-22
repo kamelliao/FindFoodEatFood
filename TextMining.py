@@ -210,6 +210,8 @@ while True:
 
 # output a csv (all in one)
 while True:
+    print("output to csv...")
+
     # merge store id
     all_store_id = review_all.review_dict.keys()
 
@@ -263,4 +265,5 @@ while True:
     all_df = all_df.sort_values(by = ["Score"], ascending = False)  # 按照分數由高到低排
     all_df.to_csv("./TextMining.csv")
 
+    print("output to csv done!")
     break
