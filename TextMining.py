@@ -170,6 +170,8 @@ class Review:
             # .py檔的資料夾中須包含一個叫 "WordCloud" 的資料夾
             # "WordCloud" 裡要有叫 "cloud.png" 的 png 圖檔作為文字雲輪廓。還需要字型檔 (.otf)
             store_name = self._review_dict[ids]["name"]
+            store_name = store_name.replace("/", "|")
+            store_name = store_name.replace(".", "|")
             storage_path = f"./WordCloud/{store_name}.png"
             mask = np.array(Image.open(self._mask_file_path))
             wc = WordCloud(
