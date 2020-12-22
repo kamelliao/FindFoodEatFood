@@ -12,9 +12,9 @@ class Review:
         self._opinion_word_file_path = str(opinion_word_file_path)
         self._stop_word_file_path = str(stop_word_file_path)
         self._ws_data_file_path = str(ws_data_file_path)
-        self._opinion_word_df = self.opinion_csv2df()
         self._review_df = self.review_csv2df()
         self._review_dict = self.review_csv2dict()
+        self._opinion_word_df = self.opinion_csv2df()
         self._store_review = self.store_review_score()  # [[ids, store_name, score], ...]
         self._stop_word_list = self.stop_word_list()  # stop word list
         # review_file_path：店家評論的 csv 檔，colname = [general_type, specific_type, place_id, name, review1, review2, review3, review4, review5, IG_comment, IG_link]
@@ -46,17 +46,19 @@ class Review:
 
     # opinion_csv2df：讀入 opinion word csv檔，轉變成 dataframe
     def opinion_csv2df(self):
-        df = pd.read_csv(self._opinion_word_file_path, encoding = "utf-8")  # <<< 現在有 encoding 問題
+        df = pd.read_csv(self._opinion_word_file_path, encoding = "big5")
+        print("opinion_csv2df done")
         return df
 
     # review_csv2df：讀入 all_review csv檔，轉變成 dataframe
     def review_csv2df(self):
-        df = pd.read_csv(self._review_file_path, encoding = "utf-8")  # <<< 現在有 encoding 問題
+        df = pd.read_csv(self._review_file_path, encoding = "utf-8")
+        print("review_csv2df done")
         return df
 
     # review_csv2dict：讀入 csv 檔，轉變成 Dictionary 
     def review_csv2dict(self):
-        df = pd.read_csv(self._review_file_path, encoding = "utf-8")  # <<< 現在有 encoding 問題
+        df = pd.read_csv(self._review_file_path, encoding = "utf-8")
         ids = df["place_id"].to_list()
         place_name = df["name"].to_list()
         cate = df["general_type"].to_list()
@@ -79,6 +81,7 @@ class Review:
                 "ig_link": ig_link[i],
                 "region": region[i]
             }
+        print("review_csv2dict done")
         return review_dict
 
     # stop_word_list：讀入 stopword.txt
@@ -88,6 +91,7 @@ class Review:
         for i in range(len(stop_words)):
             stop_words[i] = stop_words[i].strip("\n")
         f.close()
+        print("stop_word_list done")
         return stop_words
 
     # store_review_score：算每家店的評價分數
@@ -131,6 +135,7 @@ class Review:
             print("Counting score...")
 
         del ws
+        print("store_review_score done")
         return store_review
 
     # wordcloud：畫每家店的文字雲
@@ -177,6 +182,7 @@ class Review:
             wc.to_file(storage_path)
             print("Making wordcloud....")
         del ws
+        print("Making wordcloud done")
         return
 
 # all review
