@@ -282,92 +282,100 @@ class Choose_Type(tk.Frame):  #選擇食物種類畫面
         now = datetime.datetime.now()
         f1 = tkFont.Font(size = 18, family = 'jf open 粉圓 1.1')  #各式字體大小、字形
 
-        self.lb1 = tk.Label(self, text = 'FindEat   —   找食瞭瞭', bg = '#FFE9C4', font = f1, fg = '#FFB140')     #開頭標題 FindEat   —   找食瞭瞭
-
-        if (int(now.hour) < 17 or int(now.hour) >= 5) and list1[0] == '118巷':
-            image1 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\118-日-食物.png")  #118-日-食物背景圖片檔案位置
+        if (int(now.hour) < 17 and int(now.hour) >= 5) and list1[0] == '118巷':
+            image_location = random.choices(["C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\118_day_1.png", "C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\118_day_2.png"])
+            image1 = Image.open(image_location[0])  #118-日-食物背景圖片檔案位置
         elif (int(now.hour) >= 17 or int(now.hour) < 5) and list1[0] == '118巷':
-            image1 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\118-夜-食物.png")  #118-夜-食物背景圖片檔案位置
-        elif (int(now.hour) < 17 or int(now.hour) >= 5) and list1[0] == '溫州街':
-            image1 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\溫州街-日-食物.png")     #溫州街-日-食物背景圖片檔案位置
+            image_location = random.choices(["C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\118_night_1.png", "C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\118_night_2.png"])
+            image1 = Image.open(image_location[0])  #118-夜-食物背景圖片檔案位置
+        elif (int(now.hour) < 17 and int(now.hour) >= 5) and list1[0] == '溫州街':
+            image_location = random.choices(["C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\溫州街_day_1.png", "C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\溫州街_day_2.png"])
+            image1 = Image.open(image_location[0])  #溫州街-日-食物背景圖片檔案位置
         elif (int(now.hour) >= 17 or int(now.hour) < 5) and list1[0] == '溫州街':
-            image1 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\溫州街-夜-食物.png")     #溫州街-夜-食物背景圖片檔案位置
-        elif (int(now.hour) < 17 or int(now.hour) >= 5) and list1[0] == '都可以':
-            image1 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\都可以-日-食物.png")  #都可以-日-食物背景圖片檔案位置
+            image_location = random.choices(["C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\溫州街_night_1.png", "C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\溫州街_night_2.png"])
+            image1 = Image.open(image_location[0])  #溫州街-夜-食物背景圖片檔案位置
+        elif (int(now.hour) < 17 and int(now.hour) >= 5) and list1[0] == '都可以':
+            image_location = random.choices(["C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\都可以_day_1.png", "C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\都可以_day_2.png"])
+            image1 = Image.open(image_location[0])  #都可以-日-食物背景圖片檔案位置
         elif (int(now.hour) >= 17 or int(now.hour) < 5) and list1[0] == '都可以':
-            image1 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\都可以-夜-食物.png")  #都可以-夜-食物背景圖片檔案位置
-        elif (int(now.hour) < 17 or int(now.hour) >= 5) and list1[0] == '公館':
-            image1 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\公館-日-食物.png")    #公館-日-食物背景圖片檔案位置
+            image_location = random.choices(["C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\都可以_night_1.png", "C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\都可以_night_2.png"])
+            image1 = Image.open(image_location[0])  #都可以-夜-食物背景圖片檔案位置
+        elif (int(now.hour) < 17 and int(now.hour) >= 5) and list1[0] == '公館':
+            image_location = random.choices(["C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\公館_day_1.png", "C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\公館_day_2.png"])
+            image1 = Image.open(image_location[0])  #公館-日-食物背景圖片檔案位置
         elif (int(now.hour) >= 17 or int(now.hour) < 5) and list1[0] == '公館':
-            image1 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\公館-夜-食物.png")    #公館-夜-食物背景圖片檔案位置
-        image1 = image1.resize((500, 590), Image.ANTIALIAS)
+            image_location = random.choices(["C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\公館_night_1.png", "C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\公館_night_2.png"])
+            image1 = Image.open(image_location[0])  #公館-夜-食物背景圖片檔案位置
+        image1 = image1.resize((500, 650), Image.ANTIALIAS)
         self.image1 = ImageTk.PhotoImage(image1)
         self.lb2 = tk.Label(self, image= self.image1, bg = '#FFE9C4')
         
-        self.lb1.place(x = 0, y = 0, anchor = 'nw', width = 500, height = 60)
-        self.lb2.place(x = 0, y = 55, anchor = 'nw')
+        self.lb2.place(x = 0, y = 0, anchor = 'nw')
 
         #各類食物按鈕
         image2 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\食物類型_台式小吃.png")  #食物類型_台式小吃按鈕圖片檔案位置
         image2 = image2.resize((160, 58), Image.ANTIALIAS)
         self.image2 = ImageTk.PhotoImage(image2)
-        self.button1 = tk.Button(self, image= self.image2, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button(button1))  #食物類型_台式小吃按鈕外型+跳轉命令
+        self.button1 = tk.Button(self, image= self.image2, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button('台式小吃', 1, 85, 275, '台式/小吃'))  #食物類型_台式小吃按鈕外型+跳轉命令
 
         image3 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\食物類型_日式料理.png")  #食物類型_日式料理按鈕圖片檔案位置
         image3 = image3.resize((160, 58), Image.ANTIALIAS)
         self.image3 = ImageTk.PhotoImage(image3)
-        self.button2 = tk.Button(self, image= self.image3, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button(button1))  #食物類型_日式料理按鈕外型+跳轉命令
+        self.button2 = tk.Button(self, image= self.image3, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button('日式料理', 2, 255, 275, '日式料理'))  #食物類型_日式料理按鈕外型+跳轉命令
 
         image4 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\食物類型_美式.png")  #食物類型_美式按鈕圖片檔案位置
         image4 = image4.resize((160, 58), Image.ANTIALIAS)
         self.image4 = ImageTk.PhotoImage(image4)
-        self.button3 = tk.Button(self, image= self.image4, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button(button1))  #食物類型_美式按鈕外型+跳轉命令
+        self.button3 = tk.Button(self, image= self.image4, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button('美式', 3, 85, 345, '西式/美式'))  #食物類型_美式按鈕外型+跳轉命令
 
         image5 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\食物類型_韓式料理.png")  #食物類型_韓式料理按鈕圖片檔案位置
         image5 = image5.resize((160, 58), Image.ANTIALIAS)
         self.image5 = ImageTk.PhotoImage(image5)
-        self.button4 = tk.Button(self, image= self.image5, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button(button1))  #食物類型_韓式料理按鈕外型+跳轉命令
+        self.button4 = tk.Button(self, image= self.image5, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button('韓式料理', 4, 255, 345, '韓式料理'))  #食物類型_韓式料理按鈕外型+跳轉命令
 
         image6 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\食物類型_飲料.png")  #食物類型_飲料按鈕圖片檔案位置
         image6 = image6.resize((160, 58), Image.ANTIALIAS)
         self.image6 = ImageTk.PhotoImage(image6)
-        self.button5 = tk.Button(self, image= self.image6, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button(button1))  #食物類型_飲料按鈕外型+跳轉命令
+        self.button5 = tk.Button(self, image= self.image6, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button('飲料', 5, 85, 415, '飲料/甜點'))  #食物類型_飲料按鈕外型+跳轉命令
 
         image7 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\食物類型_東南亞.png")  #食物類型_東南亞按鈕圖片檔案位置
         image7 = image7.resize((160, 58), Image.ANTIALIAS)
         self.image7 = ImageTk.PhotoImage(image7)
-        self.button6 = tk.Button(self, image= self.image7, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button(button1))  #食物類型_東南亞按鈕外型+跳轉命令
+        self.button6 = tk.Button(self, image= self.image7, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button('東南亞', 6, 255, 415, '東南亞'))  #食物類型_東南亞按鈕外型+跳轉命令
 
         image8 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\食物類型_素食.png")  #食物類型_素食按鈕圖片檔案位置
         image8 = image8.resize((160, 58), Image.ANTIALIAS)
         self.image8 = ImageTk.PhotoImage(image8)
-        self.button7 = tk.Button(self, image= self.image8, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button(button1))  #食物類型_素食按鈕外型+跳轉命令
+        self.button7 = tk.Button(self, image= self.image8, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button('素食', 7, 85, 488, '素食'))  #食物類型_素食按鈕外型+跳轉命令
 
         image9 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\食物類型_火鍋.png")  #食物類型_火鍋按鈕圖片檔案位置
         image9 = image9.resize((160, 58), Image.ANTIALIAS)
         self.image9 = ImageTk.PhotoImage(image9)
-        self.button8 = tk.Button(self, image= self.image9, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button(button1))  #食物類型_火鍋按鈕外型+跳轉命令
+        self.button8 = tk.Button(self, image= self.image9, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button('火鍋', 8, 255, 488, '火鍋'))  #食物類型_火鍋按鈕外型+跳轉命令
 
         image10 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\食物類型_隨便.png")  #食物類型_隨便按鈕圖片檔案位置
         image10 = image10.resize((160, 58), Image.ANTIALIAS)
         self.image10 = ImageTk.PhotoImage(image10)
-        self.button9 = tk.Button(self, image= self.image10, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button(button1))  #食物類型_隨便按鈕外型+跳轉命令
+        self.button9 = tk.Button(self, image= self.image10, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button('隨便', 9, 85, 560, 'all'))  #食物類型_隨便按鈕外型+跳轉命令
 
         image11 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\食物類型_FIND.png")  #食物類型_FIND按鈕圖片檔案位置
         image11 = image11.resize((160, 58), Image.ANTIALIAS)
         self.image11 = ImageTk.PhotoImage(image11)
         self.button10 = tk.Button(self, image= self.image11, relief="flat", bg = '#434343', border = 0, command = lambda: root.switch_frame(self, Final))  #食物類型_FIND按鈕外型+跳轉命令
 
-        self.button1.place(x = 90, y = 270, anchor = 'nw')
-        self.button2.place(x = 260, y = 270, anchor = 'nw')
-        self.button3.place(x = 90, y = 340, anchor = 'nw')
-        self.button4.place(x = 260, y = 340, anchor = 'nw')
-        self.button5.place(x = 90, y = 410, anchor = 'nw')
-        self.button6.place(x = 260, y = 410, anchor = 'nw')
-        self.button7.place(x = 90, y = 483, anchor = 'nw')
-        self.button8.place(x = 260, y = 483, anchor = 'nw')
-        self.button9.place(x = 90, y = 555, anchor = 'nw')
-        self.button10.place(x = 260, y = 555, anchor = 'nw')
+        self.lb1 = tk.Label(self, text = 'FindEat   —   找食瞭瞭', bg = '#FFE9C4', font = f1, fg = '#FFB140')     #開頭標題 FindEat   —   找食瞭瞭
+        self.lb1.place(x = 0, y = 0, anchor = 'nw', width = 500, height = 60)
+
+        self.button1.place(x = 85, y = 275, anchor = 'nw')
+        self.button2.place(x = 255, y = 275, anchor = 'nw')
+        self.button3.place(x = 85, y = 345, anchor = 'nw')
+        self.button4.place(x = 255, y = 345, anchor = 'nw')
+        self.button5.place(x = 85, y = 415, anchor = 'nw')
+        self.button6.place(x = 255, y = 415, anchor = 'nw')
+        self.button7.place(x = 85, y = 488, anchor = 'nw')
+        self.button8.place(x = 255, y = 488, anchor = 'nw')
+        self.button9.place(x = 85, y = 560, anchor = 'nw')
+        self.button10.place(x = 255, y = 560, anchor = 'nw')
 
 
     #固定區塊home跟返回鍵
@@ -384,10 +392,78 @@ class Choose_Type(tk.Frame):  #選擇食物種類畫面
         self.backbutton.place(x = 10, y = 14, anchor = 'nw')
         self.homebutton.place(x = 450, y = 11, anchor = 'nw')
 
-    def change_button(self, var):
+    def change_button(self, var, var2,  xplace, yplace, var3):
         global list1
-        a = var
-        location = 'C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\' + list1[2] + '_食物類型_隨便_改色' + '.png'
+        list1[1].append(var3)
+        print(list1)
+        if list1[0] == '118巷':
+            bt_image_location = 'C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\食物類型_'+ var + '_改色.png'
+        elif list1[0] == '公館':
+            bt_image_location = 'C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\食物類型_'+ var + '_改色2.png'
+        elif list1[0] == '溫州街':
+            bt_image_location = 'C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\食物類型_'+ var + '_改色3.png'
+        elif list1[0] == '都可以':
+            bt_image_location = 'C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\食物類型_'+ var + '_改色4.png'
+        if var2 == 1:    
+            image12 = Image.open(bt_image_location)
+            image12 = image12.resize((160, 58), Image.ANTIALIAS)
+            self.image12 = ImageTk.PhotoImage(image12)
+            self.button11 = tk.Button(self, image= self.image12, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button2(var3, self.button11))  #反白按鈕外型+命令
+            self.button11.place(x = xplace, y = yplace, anchor = 'nw')
+        elif var2 == 2:    
+            image13 = Image.open(bt_image_location)
+            image13 = image13.resize((160, 58), Image.ANTIALIAS)
+            self.image13 = ImageTk.PhotoImage(image13)
+            self.button12 = tk.Button(self, image= self.image13, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button2(var3, self.button12))  #反白按鈕外型+命令
+            self.button12.place(x = xplace, y = yplace, anchor = 'nw')
+        elif var2 == 3:    
+            image14 = Image.open(bt_image_location)
+            image14 = image14.resize((160, 58), Image.ANTIALIAS)
+            self.image14 = ImageTk.PhotoImage(image14)
+            self.button13 = tk.Button(self, image= self.image14, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button2(var3, self.button13))  #反白按鈕外型+命令
+            self.button13.place(x = xplace, y = yplace, anchor = 'nw')
+        elif var2 == 4:    
+            image15 = Image.open(bt_image_location)
+            image15 = image15.resize((160, 58), Image.ANTIALIAS)
+            self.image15 = ImageTk.PhotoImage(image15)
+            self.button14 = tk.Button(self, image= self.image15, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button2(var3, self.button14))  #反白按鈕外型+命令
+            self.button14.place(x = xplace, y = yplace, anchor = 'nw')
+        elif var2 == 5:    
+            image16 = Image.open(bt_image_location)
+            image16 = image16.resize((160, 58), Image.ANTIALIAS)
+            self.image16 = ImageTk.PhotoImage(image16)
+            self.button15 = tk.Button(self, image= self.image16, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button2(var3, self.button15))  #反白按鈕外型+命令
+            self.button15.place(x = xplace, y = yplace, anchor = 'nw')
+        elif var2 == 6:    
+            image17 = Image.open(bt_image_location)
+            image17 = image17.resize((160, 58), Image.ANTIALIAS)
+            self.image17 = ImageTk.PhotoImage(image17)
+            self.button16 = tk.Button(self, image= self.image17, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button2(var3, self.button16))  #反白按鈕外型+命令
+            self.button16.place(x = xplace, y = yplace, anchor = 'nw')
+        elif var2 == 7:    
+            image18 = Image.open(bt_image_location)
+            image18 = image18.resize((160, 58), Image.ANTIALIAS)
+            self.image18 = ImageTk.PhotoImage(image18)
+            self.button17 = tk.Button(self, image= self.image18, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button2(var3, self.button17))  #反白按鈕外型+命令
+            self.button17.place(x = xplace, y = yplace, anchor = 'nw')
+        elif var2 == 8:    
+            image19 = Image.open(bt_image_location)
+            image19 = image19.resize((160, 58), Image.ANTIALIAS)
+            self.image19 = ImageTk.PhotoImage(image19)
+            self.button18 = tk.Button(self, image= self.image19, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button2(var3, self.button18))  #反白按鈕外型+命令
+            self.button18.place(x = xplace, y = yplace, anchor = 'nw')
+        elif var2 == 9:    
+            image20 = Image.open(bt_image_location)
+            image20 = image20.resize((160, 58), Image.ANTIALIAS)
+            self.image20 = ImageTk.PhotoImage(image20)
+            self.button19 = tk.Button(self, image= self.image20, relief="flat", bg = '#434343', border = 0, command = lambda: self.change_button2(var3, self.button19))  #反白按鈕外型+命令
+            self.button19.place(x = xplace, y = yplace, anchor = 'nw')
+
+    def change_button2(self, var1, bt):
+        global list1
+        list1[1].remove(var1)
+        bt.destroy()
+        print(list1)
 
 class Choose_Food(tk.Frame):  #選擇食物畫面
 
@@ -455,20 +531,20 @@ class game2(tk.Frame):  #選擇食物畫面
         self.lb1 = tk.Label(self, text = 'FindEat   —   找食瞭瞭', bg = '#FFE9C4', font = f1, fg = '#FFB140')
         self.lb2 = tk.Label(self, text = "你現在的心情如何?", bg = '#FFEED2', font = f2, fg = '#554640')
 
-        image1 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\開心.png")  #開心按鈕圖片檔案位置
-        image1 = image1.resize((150, 75), Image.ANTIALIAS)
+        image1 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\空虛寂寞.png")  #空虛寂寞按鈕圖片檔案位置
+        image1 = image1.resize((135, 50), Image.ANTIALIAS)
         self.image1 = ImageTk.PhotoImage(image1)
-        self.button1 = tk.Button(self, image= self.image1, relief="flat", bg = '#FFEED2', border = 0, command = lambda: root.switch_game(self, game3, '開心'))  #按鈕外型+跳轉命令
+        self.button1 = tk.Button(self, image= self.image1, relief="flat", bg = '#FFEED2', border = 0, command = lambda: root.switch_game(self, game3, '空虛寂寞'))  #按鈕外型+跳轉命令
 
-        image2 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\難過.png")  #難過按鈕圖片檔案位置
-        image2 = image2.resize((150, 75), Image.ANTIALIAS)
+        image2 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\憤怒焦慮.png")  #憤怒焦慮按鈕圖片檔案位置
+        image2 = image2.resize((135, 50), Image.ANTIALIAS)
         self.image2 = ImageTk.PhotoImage(image2)
-        self.button2 = tk.Button(self, image= self.image2, relief="flat", bg = '#FFEED2', border = 0, command = lambda: root.switch_game(self, game3, '難過'))  #按鈕外型+跳轉命令
+        self.button2 = tk.Button(self, image= self.image2, relief="flat", bg = '#FFEED2', border = 0, command = lambda: root.switch_game(self, game3, '憤怒焦慮'))  #按鈕外型+跳轉命令
 
-        image3 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\生氣.png")  #生氣按鈕圖片檔案位置
-        image3 = image3.resize((150, 75), Image.ANTIALIAS)
+        image3 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\平靜輕鬆.png")  #平靜輕鬆按鈕圖片檔案位置
+        image3 = image3.resize((135, 50), Image.ANTIALIAS)
         self.image3 = ImageTk.PhotoImage(image3)
-        self.button3 = tk.Button(self, image= self.image3, relief="flat", bg = '#FFEED2', border = 0, command = lambda: root.switch_game(self, game3, '生氣'))  #按鈕外型+跳轉命令
+        self.button3 = tk.Button(self, image= self.image3, relief="flat", bg = '#FFEED2', border = 0, command = lambda: root.switch_game(self, game3, '平靜輕鬆'))  #按鈕外型+跳轉命令
 
         image4 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\吐司人2.png")  #吐司人2圖片檔案位置
         image4 = image4.resize((370, 370), Image.ANTIALIAS)
@@ -512,15 +588,15 @@ class game3(tk.Frame):  #選擇食物畫面
         self.lb1 = tk.Label(self, text = 'FindEat   —   找食瞭瞭', bg = '#FFE9C4', font = f1, fg = '#FFB140')
         self.lb2 = tk.Label(self, text = "你是一個怎麼樣的人?", bg = '#FFEED2', font = f2, fg = '#554640')
 
-        image1 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\內向.png")  #內向按鈕圖片檔案位置
-        image1 = image1.resize((150, 75), Image.ANTIALIAS)
+        image1 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\溫和穩重.png")  #溫和穩重按鈕圖片檔案位置
+        image1 = image1.resize((135, 50), Image.ANTIALIAS)
         self.image1 = ImageTk.PhotoImage(image1)
-        self.button1 = tk.Button(self, image= self.image1, relief="flat", bg = '#FFEED2', border = 0, command = lambda: root.switch_game(self, game4, '內向'))  #按鈕外型+跳轉命令
+        self.button1 = tk.Button(self, image= self.image1, relief="flat", bg = '#FFEED2', border = 0, command = lambda: root.switch_game(self, game4, '溫和穩重'))  #按鈕外型+跳轉命令
 
-        image2 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\外向.png")  #外向按鈕圖片檔案位置
-        image2 = image2.resize((150, 75), Image.ANTIALIAS)
+        image2 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\熱情急躁.png")  #熱情急躁按鈕圖片檔案位置
+        image2 = image2.resize((135, 50), Image.ANTIALIAS)
         self.image2 = ImageTk.PhotoImage(image2)
-        self.button2 = tk.Button(self, image= self.image2, relief="flat", bg = '#FFEED2', border = 0, command = lambda: root.switch_game(self, game4, '外向'))  #按鈕外型+跳轉命令
+        self.button2 = tk.Button(self, image= self.image2, relief="flat", bg = '#FFEED2', border = 0, command = lambda: root.switch_game(self, game4, '熱情急躁'))  #按鈕外型+跳轉命令
 
         image3 = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\吐司人3.png")  #吐司人3圖片檔案位置
         image3 = image3.resize((370, 370), Image.ANTIALIAS)
@@ -530,7 +606,7 @@ class game3(tk.Frame):  #選擇食物畫面
         self.lb1.place(x = 0, y = 0, anchor = 'nw', width = 500, height = 60)
         self.lb2.place(x = 40, y = 130, anchor = 'nw')
         self.lb3.place(x = 65, y = 300, anchor = 'nw')
-        self.button1.place(x = 80, y = 200, anchor = 'nw')
+        self.button1.place(x = 100, y = 200, anchor = 'nw')
         self.button2.place(x = 255, y = 200, anchor = 'nw')
 
         #固定區塊home跟返回鍵
@@ -556,6 +632,7 @@ class game4(tk.Frame):  #選擇食物畫面
         self.pack(fill = "both", expand = True)
 
     def creatWidgets(self):
+        now = datetime.datetime.now()
 
         f1 = tkFont.Font(size = 18, family = 'jf open 粉圓 1.1')
         f2 = tkFont.Font(size = 32, family = 'jf open 粉圓 1.1')
@@ -564,8 +641,17 @@ class game4(tk.Frame):  #選擇食物畫面
         self.lb1 = tk.Label(self, text = 'FindEat   —   找食瞭瞭', bg = '#FFE9C4', font = f1, fg = '#FFB140')
         self.lb2 = tk.Label(self, text = "適合你吃的食物是:", bg = '#FFEED2', font = f2, fg = '#554640')
 
-        foodlist = ['義大利麵', '咖哩', '牛排', '粥', '冰品', '飲料', '火鍋', '水餃/鍋貼', '小吃', '炒飯'
-                   ,  '日式料理', '韓式料理', '泰式料理', '滷味', '鹹酥雞', '便當', '早午餐', '低GI', '拉麵', '素食', '速食']
+        if gamelist[0] == '空虛寂寞' and gamelist[1] == '溫和穩重':
+            foodlist = ['牛排', '火鍋', '冰品']
+        elif gamelist[0] == '空虛寂寞' and gamelist[1] == '熱情急躁':
+            foodlist = ['炒飯', '滷味', '速食', '飲料']
+        elif gamelist[0] == '憤怒焦慮':
+            foodlist = ['義大利麵', '拉麵', '咖哩', '鹹酥雞', '韓式料理', '泰式料理']
+        elif gamelist[0] == '平靜輕鬆':
+            if int(now.hour) <= 13 and int(now.hour) >= 5:
+                foodlist = ['早午餐', '日式料理', '水餃/鍋貼', '便當', '粥', '低GI', '素食']
+            else:
+                foodlist = ['日式料理', '水餃/鍋貼', '便當', '粥', '低GI', '素食']
         food = str(random.choices(foodlist)[0])
         self.lb3 = tk.Label(self, text = food + '!', bg = '#FFEED2', font = f2, fg = '#554640')
 
@@ -573,6 +659,15 @@ class game4(tk.Frame):  #選擇食物畫面
         image1 = image1.resize((400, 50), Image.ANTIALIAS)
         self.image1 = ImageTk.PhotoImage(image1)
         self.lb4 = tk.Label(self, image= self.image1, bg = '#FFEED2', border = 0)
+
+        if food == '水餃/鍋貼':
+            food = '水餃鍋貼'
+        image_location = "C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\" + food + ".png"
+        image2 = Image.open(image_location)
+        image2 = image2.resize((250, 200), Image.ANTIALIAS)
+        self.image2 = ImageTk.PhotoImage(image2)
+        self.lb5 = tk.Label(self, image= self.image2, bg = '#FFEED2', border = 0)
+        self.lb5.place(x = 130, y = 200, anchor = 'nw')
 
         self.button1 = tk.Button(self, text = "找附近的" + food + '餐廳', bg = '#514C44', font = f3, fg = 'white', relief="flat", command = lambda: root.switch_frame3(self, Choose_Place, food))
 
@@ -651,7 +746,7 @@ class Final(tk.Frame):  #選擇食物畫面
         home = Image.open("C:\\Users\\jenny\\Desktop\\商管程式設計\\期末報告\\首頁鍵.png")  #首頁鍵按鈕圖片檔案位置
         home = home.resize((37, 30), Image.ANTIALIAS)
         self.home = ImageTk.PhotoImage(home)
-        self.homebutton = tk.Button(self, image= self.home, relief="flat", bg = '#FFE9C4', command = lambda: root.switch_frame2(self, FirstPage))  #首頁鍵按鈕外型+跳轉命令
+        self.homebutton = tk.Button(self, image= self.home, relief="flat", bg = '#FFE9C4', command = lambda: root.switch_home(self, FirstPage))  #首頁鍵按鈕外型+跳轉命令
 
         self.backbutton.place(x = 10, y = 14, anchor = 'nw')
         self.homebutton.place(x = 450, y = 11, anchor = 'nw')
