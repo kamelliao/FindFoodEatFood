@@ -39,7 +39,7 @@ def filter_restaurants(all_info=all_info, info=info, date: int) -> list:
         food_path = './food/{Id}.png'.format(Id=row['Id'])
         word_cloud_path = './wordcloud/{Id}.png'.format(Id=row['Id'])  # 文字雲檔案路徑
         busyness_path = './busyness/{Id}_{Date}.png'.format(Id=row['Id'], Date=date_map[date])  # 繁忙時間柱狀圖檔案路徑
-        row_data = [row['Name'], row['pinyin'], row['Score'], row['Subcategory'], time_day, row['Google_link'], food_path, word_cloud_path, busyness_path]
+        row_data = [row['Name'], row['Region'], row['pinyin'], row['Score'], row['Subcategory'], time_day, row['Google_link'], food_path, word_cloud_path, busyness_path]
         list_result.append(row_data)
 
     # 輸出結果
