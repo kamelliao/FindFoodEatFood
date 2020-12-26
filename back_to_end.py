@@ -11,10 +11,10 @@ def filter_restaurants(all_info=all_info, info=info, date: int) -> list:
     # 篩選食物與地區
     if info['Category']:
         # 當模式為「選餐廳」
-        idx = np.where((all_info['region'] == info['region']) & (all_info['Category'].isin(info['Category'])))
+        idx = np.where((all_info['region'].isin(info['region'])) & (all_info['Category'].isin(info['Category'])))
     else:
         # 當模式為「選食物」
-        idx = np.where((all_info['region'] == info['region']) & (all_info['Subcategory'] == info['Subcategory']))
+        idx = np.where((all_info['region'].isin(info['region'])) & (all_info['Subcategory'] == info['Subcategory']))
     selected_restaurant = all_info.loc[idx]
 
     # 將篩選結果轉換成前端的輸出格式
