@@ -6,7 +6,7 @@ import numpy as np
 all_info = pd.read_csv('all_info.csv', encoding='utf-8', converters={'periods': eval})
 
 # 篩選資料並輸出前端要求的list
-def filter_restaurants(all_info=all_info, info=info, date: int) -> list:
+def filter_restaurants(all_info, info, date: int) -> list:
     list_result = []
     # 篩選食物與地區
     if info['Category']:
@@ -16,6 +16,7 @@ def filter_restaurants(all_info=all_info, info=info, date: int) -> list:
         # 當模式為「選食物」
         idx = np.where((all_info['region'].isin(info['region'])) & (all_info['Subcategory'] == info['Subcategory']))
     selected_restaurant = all_info.loc[idx]
+    print(idx)
 
     # 將篩選結果轉換成前端的輸出格式
     for _, row in selected_restaurant.iterrows():
@@ -39,7 +40,7 @@ def filter_restaurants(all_info=all_info, info=info, date: int) -> list:
         food_path = './food/{Id}.png'.format(Id=row['Id'])
         word_cloud_path = './wordcloud/{Id}.png'.format(Id=row['Id'])  # 文字雲檔案路徑
         busyness_path = './busyness/{Id}_{Date}.png'.format(Id=row['Id'], Date=date_map[date])  # 繁忙時間柱狀圖檔案路徑
-        row_data = [row['Name'], row['Region'], row['pinyin'], row['Score'], row['Subcategory'], time_day, row['Google_link'], food_path, word_cloud_path, busyness_path]
+        row_data = [row['Name'], row['region'], row['pinyin'], row['Score'], row['Subcategory'], time_day, row['Google_link'], food_path, word_cloud_path, busyness_path]
         list_result.append(row_data)
 
     # 輸出結果
