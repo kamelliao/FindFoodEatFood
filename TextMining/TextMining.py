@@ -172,7 +172,6 @@ class Review:
 
             # 文字雲
             # .py檔的資料夾中須包含一個叫 "WordCloud" 的資料夾
-            # "WordCloud" 裡要有叫 "cloud.png" 的 png 圖檔作為文字雲輪廓。還需要字型檔 (.otf / .ttf)
             store_id = ids
             store_id = store_id.replace("/", "|")
             store_id = store_id.replace(".", "|")
