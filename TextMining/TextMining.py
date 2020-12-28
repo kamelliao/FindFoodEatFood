@@ -196,11 +196,11 @@ class Review:
 
 # all review
 while True:
-    review_file_path = "https://github.com/chhtwhc/FindFoodEatFood/raw/main/ultimate_1224.csv"
-    opinion_word_file_path = "./CSentiPackage/ANTUSD_traditional/opinion_word.csv"  # 固定的
-    stop_word_file_path = "./stop_words.txt"  # 固定的
-    mask_file_path = "./WordCloud/cloud.png"  # 固定的
-    font_file_path = "./WordCloud/font/jf-openhuninn.ttf"
+    review_file_path = "https://github.com/chhtwhc/FindFoodEatFood/raw/main/TextMining/ultimate_1224.csv"
+    opinion_word_file_path = "https://raw.githubusercontent.com/chhtwhc/FindFoodEatFood/main/TextMining/opinion_word.csv"
+    stop_word_file_path = "https://raw.githubusercontent.com/chhtwhc/FindFoodEatFood/main/TextMining/stop_words.txt"
+    mask_file_path = "https://github.com/chhtwhc/FindFoodEatFood/raw/main/TextMining/chicken.png"
+    font_file_path = "https://github.com/chhtwhc/FindFoodEatFood/raw/main/TextMining/font/jf-openhuninn.ttf"
     ws_data_file_path = "./data"  # 固定的
     review_all = Review(
                     review_file_path = review_file_path,
