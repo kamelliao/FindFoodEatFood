@@ -1,8 +1,16 @@
-# FindFoodEatFood
+# FindEat
 Programming for Business Computing (IM2011), 2020 Fall
 
-Final Project — 找食瞭瞭
+Final Project — FindEat 找食瞭瞭 - 尋找校園週邊美食的好幫手
 
+### 組員 Group Member
+* 劉語昕
+* @greatseng
+* @william2536
+* @kamelliao
+* @chhtwhc
+
+### 成果介紹
 <table>
   <tr>
     <td><img src="https://i.imgur.com/dJzuq6v.jpg"></td>
