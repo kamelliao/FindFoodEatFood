@@ -1,7 +1,7 @@
-# FindEat
-Programming for Business Computing (IM2011), 2020 Fall
-
-Final Project — FindEat 找食瞭瞭 - 尋找校園週邊美食的好幫手
+# FindEat 找食瞭瞭 - 尋找校園週邊美食的好幫手
+> Course Name: Programming for Business Computing (IM2011)  
+> Semester: 2020 Fall  
+> Instructor: Ling-Chieh Kung  
 
 ### 組員 Group Member
 * 劉語昕
